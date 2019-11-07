@@ -9,8 +9,11 @@
 # Data Loading
 # Database Approach
 drv <- JDBC("oracle.jdbc.OracleDriver",classPath="D:/Jahid/ojdbc6.jar", " ")
+
 con <- dbConnect(drv, "jdbc:oracle:thin:@//edw-scan:1521/database name","your data base schema name","your own credentials")
+
 data<-dbGetQuery(con, "select * FROM TMP_KPI") #TMP_PACK_REC_FINAL
+
 # Manual Approach
 data<-read.csv("filepath/data.csv",sep=",")
 
