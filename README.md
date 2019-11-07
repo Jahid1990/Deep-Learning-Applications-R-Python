@@ -178,3 +178,59 @@ history <-model %>% fit(
   
   validation_data = list(x_test,list(y_test[,1:14],y_test[,15:46]))
 )
+
+############################################################################################################################
+##                           Save and load model
+############################################################################################################################
+
+#library(kerasR)
+#keras_save(model, path = "D:/Jahid/TRIGGER_TAKER_PREDICTION/model_v3_improved.h5")
+
+#savedmodel<-keras_load(path = "D:/Jahid/TRIGGER_TAKER_PREDICTION/model_4_packs_32_days_v1.h5")
+
+#test_model<-keras_model_to_json(model, path = "D:/Jahid/TRIGGER_TAKER_PREDICTION/model_v3_improved.json")
+#load_kears<-keras_model_from_json(path = "D:/Jahid/TRIGGER_TAKER_PREDICTION/model_v3_improved.json")
+
+model %>% save_model_hdf5("D:/Jahid/TRIGGER_TAKER_PREDICTION/model_v3_improved.h5")
+new_model <- load_model_hdf5("D:/Jahid/TRIGGER_TAKER_PREDICTION/model_v3_improved.h5")
+##########################################################################################################################
+
+scores <- model %>% evaluate(
+  x_test, y_test, verbose = 0
+)
+
+scores
+
+prop.table(table(y_test))
+
+# Evaluation & Prediction - train data
+
+pred <- model %>%predict(x_test)
+
+library(Rfast)
+
+
+pack<-as.data.frame(pred[1])
+pred_pack<-max.col(pack)-1
+pred_pack<-data.frame(MSISDN=test$MSISDN ,PACK_AMOUNT=pred_pack)
+pred_pack$PACK_AMOUNT<-recode(pred_pack$PACK_AMOUNT, "0=0; 1=24;2=44;3=53;4=54;5=89;6=99;7=108;8=117;9=148;10=199;11=239;12=288;13=289")
+
+dbWriteTable(con_edw,)
+
+head(test$MSISDN)
+
+
+day<-as.data.frame(pred[2])
+pred_day<-max.col(day)-1
+
+pack_table<-data.frame(table(pred_pack,(max.col(y_test[,1:14])-1)))
+pack_table$cm<-as.factor(paste(pack_table$pred_pack,pack_table$Var2,sep="_"))
+barplot(pack_table$Freq~as.character(pack_table$cm),pack_table)
+
+day_table<-data.frame(table(pred_day,(max.col(y_test[,6:37])-1)))
+day_table$cm<-as.factor(paste(day_table$pred_day,day_table$Var2,sep="_"))
+barplot(day_table$Freq~as.character(day_table$cm),day_table)
+
+write.csv(day_table,"D:/Jahid/TRIGGER_TAKER_PREDICTION/day_table.csv")
+write.csv(pack_table,"D:/Jahid/TRIGGER_TAKER_PREDICTION/pack_table.csv")
+
