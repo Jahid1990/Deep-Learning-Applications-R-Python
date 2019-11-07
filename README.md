@@ -38,24 +38,34 @@ y_train<-train[,c(15,16)]
 r<-recode(y_train[,1], "0=0; 24=1;44=2;53=3;54=4;89=5;99=6;108=7;117=8;148=9;199=10;239=11;288=12;289=13")
 
 y_train1<-to_categorical(r,num_classes =NULL)
+
 y_train2<-to_categorical(y_train[,2],num_classes =NULL)
+
 y_train<-as.matrix(data.frame(data.frame(y_train1),y_train2))
+
 column<-c(paste("pack",c(0,24,44,53,54,89,99,108,117,148,199,239,288,289),sep="_"),paste("day",c(0:31),sep="_"))
+
 colnames(y_train)<-column
-head(y_train)
+
 
 x_test<-as.matrix(test[,-c(1,15,16)])
+
 x_test<-scale(x_test)
+
 y_test<-test[,c(15,16)]
 
-#24,44,53,54,89,99,108,117,148,199,239,288,289
+
 
 r<-recode(y_test[,1], "0=0; 24=1;44=2;53=3;54=4;89=5;99=6;108=7;117=8;148=9;199=10;239=11;288=12;289=13")
 
 y_test1<-to_categorical(r,num_classes =NULL)
+
 y_test2<-to_categorical(y_test[,2],num_classes =NULL)
+
 y_test<-as.matrix(data.frame(data.frame(y_test1),y_test2))
+
 column<-c(paste("pack",c(0,24,44,53,54,89,99,108,117,148,199,239,288,289),sep="_"),paste("day",c(0:31),sep="_"))
+
 colnames(y_test)<-column
 
 
