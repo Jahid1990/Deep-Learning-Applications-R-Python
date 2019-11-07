@@ -3,7 +3,7 @@
 In telecom industry, there are different types of products (data packs, voice packs etc) for sale to customers. Not all of the customers are eligible for all of the products to purchase. In ideal scenario, products should not be offered randomely to the customers since each of the customer is different and eligible for different products. So, personalization is highly recommended to handle this situation. 
 
 In this case, I have considered 24,44,53,54,89,99,108,117,148,199,239,288,289 voice and data packs for building recommendation engine.
-I want to build a deep learning model which can predict which pachs are going to be purchased by which customers. Simultineously, this model can predict products and day of immediate next purchase. 
+I want to build a deep learning model which can predict which pachs are going to be purchased by which customers. Simultineously, this model can predict personalized products and day of immediate next purchase by each of the customers. 
 
 #Packages Required:
 1. Tensorflow # Backend of Keras
@@ -59,6 +59,8 @@ column<-c(paste("pack",c(0,24,44,53,54,89,99,108,117,148,199,239,288,289),sep="_
 colnames(y_test)<-column
 
 
+# Model Building & Hyperparameter Tuning
+
 inputs <- layer_input(shape = c(42))
 m<-layer_dense(units = 512, activation = 'relu') (inputs)
 m<-layer_dense(units = 512, activation = 'relu') (m)
@@ -95,9 +97,6 @@ day<-layer_dense(units =128,activation ='relu')(day)
 day<-layer_dense(units =64,activation ='relu')(day)
 day<-layer_dense(units =32,activation ='softmax',name = "days")(day)
 
-
-
-conc<-layer_concatenate(c(pack,day))
 model <- keras_model(inputs = inputs, outputs =list(pack,day))
 
 summary(model)
