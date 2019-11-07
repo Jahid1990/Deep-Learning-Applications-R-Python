@@ -25,6 +25,7 @@ data<-read.csv("filepath/data.csv",sep=",")
 data[is.na(data)]<-0
 
 # Train & Test Dataset Preparation
+
 indices<-sample(1:nrow(data),nrow(data)*.8)
 
 train<-data[indices,]
@@ -75,7 +76,7 @@ colnames(y_test)<-column
 
 # Model Building & Hyperparameter Tuning
 
-inputs <- layer_input(shape = c(42))
+inputs <- layer_input(shape = c(42)) # In my case number features or variables was 42. 
 
 m<-layer_dense(units = 512, activation = 'relu') (inputs)
 
@@ -103,6 +104,8 @@ pack<-layer_dense(units =512,activation ='relu')(m)
 
 pack<-layer_dense(units =512,activation ='relu')(m)
 
+
+
 pack<-layer_dense(units =256,activation ='relu')(pack)
 
 pack<-layer_dense(units =256,activation ='relu')(pack)
@@ -117,7 +120,9 @@ pack<-layer_dense(units =256,activation ='relu')(pack)
 
 pack<-layer_dense(units =64,activation ='relu')(pack)
 
-pack<-layer_dense(units =14,activation ='softmax',name="packs")(pack)
+pack<-layer_dense(units =14,activation ='softmax',name="packs")(pack) # In my case, total number of products was 13 and 0 for non taker                                                                         group. So, total produicts would be 14.  
+
+
 
 day<-layer_dense(units =512,activation ='relu')(m)
 
@@ -139,7 +144,8 @@ day<-layer_dense(units =128,activation ='relu')(day)
 
 day<-layer_dense(units =64,activation ='relu')(day)
 
-day<-layer_dense(units =32,activation ='softmax',name = "days")(day)
+day<-layer_dense(units =32,activation ='softmax',name = "days")(day) # I wanted to see the day when customer will purchase a product in                                                                         the next 31 days. Here 0 for non taker. So, In total 32. 
+
 
 model <- keras_model(inputs = inputs, outputs =list(pack,day))
 
@@ -172,7 +178,3 @@ history <-model %>% fit(
   
   validation_data = list(x_test,list(y_test[,1:14],y_test[,15:46]))
 )
-
-
-
-
