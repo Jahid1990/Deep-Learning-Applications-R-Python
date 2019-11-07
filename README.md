@@ -72,39 +72,69 @@ colnames(y_test)<-column
 # Model Building & Hyperparameter Tuning
 
 inputs <- layer_input(shape = c(42))
+
 m<-layer_dense(units = 512, activation = 'relu') (inputs)
+
 m<-layer_dense(units = 512, activation = 'relu') (m)
+
 m<-layer_dense(units = 512, activation = 'relu') (m)
+
 m<-layer_dense(units = 512, activation = 'relu') (m)
+
 m<-layer_dense(units = 512, activation = 'relu') (m)
+
 m<-layer_dense(units = 512, activation = 'relu') (m)
+
 m<-layer_dense(units = 512, activation = 'relu') (m)
+
 m<-layer_dense(units = 512, activation = 'relu') (m)
+
 m<-layer_dense(units = 512, activation = 'relu') (m)
 
 pack<-layer_dense(units =512,activation ='relu')(m)
+
 pack<-layer_dense(units =512,activation ='relu')(m)
+
 pack<-layer_dense(units =512,activation ='relu')(m)
+
 pack<-layer_dense(units =512,activation ='relu')(m)
+
 pack<-layer_dense(units =256,activation ='relu')(pack)
+
 pack<-layer_dense(units =256,activation ='relu')(pack)
+
 pack<-layer_dense(units =128,activation ='relu')(pack)
+
 pack<-layer_dense(units =512,activation ='relu')(pack)
+
 pack<-layer_dense(units =256,activation ='relu')(pack)
+
 pack<-layer_dense(units =256,activation ='relu')(pack)
+
 pack<-layer_dense(units =64,activation ='relu')(pack)
+
 pack<-layer_dense(units =14,activation ='softmax',name="packs")(pack)
 
 day<-layer_dense(units =512,activation ='relu')(m)
+
 day<-layer_dense(units =512,activation ='relu')(m)
+
 day<-layer_dense(units =512,activation ='relu')(m)
+
 day<-layer_dense(units =512,activation ='relu')(m)
+
 day<-layer_dense(units =256,activation ='relu')(day)
+
 day<-layer_dense(units =128,activation ='relu')(day)
+
 day<-layer_dense(units =128,activation ='relu')(day)
+
 day<-layer_dense(units =128,activation ='relu')(day)
+
 day<-layer_dense(units =128,activation ='relu')(day)
+
 day<-layer_dense(units =64,activation ='relu')(day)
+
 day<-layer_dense(units =32,activation ='softmax',name = "days")(day)
 
 model <- keras_model(inputs = inputs, outputs =list(pack,day))
