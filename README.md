@@ -2,7 +2,8 @@
 
 In telecom industry, there are different types of products (data packs, voice packs etc) for sale to customers. Not all of the customers are eligible for all of the products to purchase. In ideal scenario, products should not be offered randomely to the customers since each of the customer is different and eligible for different products. So, personalization is highly recommended to handle this situation. 
 
-In this case, I have considered 24,44,53,54,89,99,108,117,148,199,239,288,289
+In this case, I have considered 24,44,53,54,89,99,108,117,148,199,239,288,289 voice and data packs for building recommendation engine.
+I want to build a deep learning model which can predict which pachs are going to be purchased by which customers. Simultineously, this model can predict products and day of immediate next purchase. 
 
 #Packages Required:
 1. Tensorflow # Backend of Keras
