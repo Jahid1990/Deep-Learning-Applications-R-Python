@@ -120,7 +120,7 @@ pack<-layer_dense(units =256,activation ='relu')(pack)
 
 pack<-layer_dense(units =64,activation ='relu')(pack)
 
-pack<-layer_dense(units =14,activation ='softmax',name="packs")(pack) # [In my case, total number of products was 13 and 0 for non taker                                                                         group. So, total produicts would be 14.]
+pack<-layer_dense(units =14,activation ='softmax',name="packs")(pack) # {In my case, total number of products was 13 and 0 for non taker                                                                         group. So, total produicts would be 14.}
 
 
 
@@ -144,7 +144,7 @@ day<-layer_dense(units =128,activation ='relu')(day)
 
 day<-layer_dense(units =64,activation ='relu')(day)
 
-day<-layer_dense(units =32,activation ='softmax',name = "days")(day) #[ I wanted to see the day when customer will purchase a product in                                                                         the next 31 days. Here 0 for non taker. So, In total 32. ]
+day<-layer_dense(units =32,activation ='softmax',name = "days")(day) #{ I wanted to see the day when customer will purchase a product in                                                                         the next 31 days. Here 0 for non taker. So, In total 32. }
 
 
 model <- keras_model(inputs = inputs, outputs =list(pack,day))
