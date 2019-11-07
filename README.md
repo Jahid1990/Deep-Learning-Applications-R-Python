@@ -26,11 +26,15 @@ data[is.na(data)]<-0
 
 # Train & Test Dataset Preparation
 indices<-sample(1:nrow(data),nrow(data)*.8)
+
 train<-data[indices,]
+
 test<-data[-indices,]
 
 x_train<-as.matrix(train[,-c(1,15,16)])
+
 x_train<-scale(x_train)
+
 y_train<-train[,c(15,16)]
 
 #24,44,53,54,89,99,108,117,148,199,239,288,289
