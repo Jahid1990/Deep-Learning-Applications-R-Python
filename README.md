@@ -143,20 +143,29 @@ summary(model)
 
 model %>% compile(
   loss=list("categorical_crossentropy","categorical_crossentropy"),
+  
   optimizer = optimizer_adam(lr =10^-4, beta_1 = 0.9, beta_2 = 0.999,
-                             epsilon =10^-9, decay = 0, amsgrad = FALSE, clipnorm = NULL,
-                             clipvalue = NULL),  metrics = c("categorical_accuracy")
+  
+  epsilon =10^-9, decay = 0, amsgrad = FALSE, clipnorm = NULL,
+                             
+ clipvalue = NULL),  metrics = c("categorical_accuracy")
 )
 
 
 
 
 history <-model %>% fit(
+
   x_train, list(y_train[,1:14],y_train[,15:46]),
+  
   batch_size =30000,
+  
   epochs =20,
+  
   verbose = 1,
+  
   validation_split = 0,
+  
   validation_data = list(x_test,list(y_test[,1:14],y_test[,15:46]))
 )
 
