@@ -1,6 +1,8 @@
 # Telecom Products-Recommendation-Engine-Using-Deep-Learning in R
 
-In telecom industry, there are different types of products (data packs, voice packs etc) for sale to customers. Not all of the customers are eligible for all of the products to purchase. In ideal scenario, products should not be offered randomely to the customers since   
+In telecom industry, there are different types of products (data packs, voice packs etc) for sale to customers. Not all of the customers are eligible for all of the products to purchase. In ideal scenario, products should not be offered randomely to the customers since each of the customer is different and eligible for different products. So, personalization is highly recommended to handle this situation. 
+
+In this case, I have considered 24,44,53,54,89,99,108,117,148,199,239,288,289
 
 #Packages Required:
 1. Tensorflow # Backend of Keras
